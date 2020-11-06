@@ -22,8 +22,29 @@ WHERE DATE_PART('year', hire_date) = 1986;
 -- List the manager of each department with the following information: 
 -- department number, department name, the manager's employee number, last name, first name.
 
+SELECT dep_managers.dept_no, 
+		dept_name, 
+		dep_managers.emp_no, 
+		last_name, 
+		first_name
+FROM dep_managers
+JOIN department
+	ON dep_managers.dept_no = department.dept_no
+JOIN employees
+	ON dep_managers.emp_no = employees.emp_no;
+	
 -- List the department of each employee with the following information: 
 -- employee number, last name, first name, and department name.
+
+SELECT employees.emp_no,
+		first_name,
+		last_name,
+		department.dept_name
+FROM employees
+JOIN dep_employee
+	ON dep_employee.emp_no = employees.emp_no
+JOIN department
+	ON department.dept_no = dep_employee.dept_no;
 
 -- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 
